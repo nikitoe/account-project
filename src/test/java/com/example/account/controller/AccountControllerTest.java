@@ -8,6 +8,7 @@ import com.example.account.service.AccountService;
 import com.example.account.service.RedisTestService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -41,6 +42,7 @@ class AccountControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
+    @DisplayName("계좌 생성 성공")
     void successCreateAccount() throws Exception {
         //given
         given(accountService.createAccount(anyLong(), anyLong()))
