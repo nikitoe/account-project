@@ -16,6 +16,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -263,4 +265,61 @@ class AccountServiceTest {
 
     }
 
+    @Test
+    @DisplayName("계좌 조회 - 성공 응답")
+    void successGetAccountsByUserId() {
+        //given
+        AccountUser pobi = AccountUser.builder()
+                .id(12L)
+                .name("Pobi").build();
+        List<Account> accounts = Arrays.asList(
+                Account.builder()
+                        .accountUser(pobi)
+                        .accountNumber("1111111111")
+                        .balance(100L)
+                        .build(),
+                Account.builder()
+                        .accountUser(pobi)
+                        .accountNumber("2222222222")
+                        .balance(200L)
+                        .build(),
+                Account.builder()
+                        .accountUser(pobi)
+                        .accountNumber("3333333333")
+                        .balance(300L)
+                        .build()
+        );
+        given(accountUserRepository.findById(anyLong()))
+                .willReturn(Optional.of(pobi));
+        given(accountRepository.findByAccountUser(any()))
+                .willReturn(accounts);
+
+        //when
+        List<AccountDto> accountDtos = accountService.getAccountsByUserId(1L);
+
+        //then
+        assertEquals(3, accountDtos.size());
+        assertEquals("1111111111", accountDtos.get(0).getAccountNumber());
+        assertEquals(100,accountDtos.get(0).getBalance());
+        assertEquals("2222222222", accountDtos.get(1).getAccountNumber());
+        assertEquals(200,accountDtos.get(1).getBalance());
+        assertEquals("3333333333", accountDtos.get(2).getAccountNumber());
+        assertEquals(300,accountDtos.get(2).getBalance());
+
+    }
+
+    @Test
+    @DisplayName("계좌 조회_사용자 없는 경우 - 실패 응답")
+    void failedToGetAccounts() {
+        //given
+        given(accountUserRepository.findById(anyLong()))
+                .willReturn(Optional.empty());
+
+        //when
+        AccountException exception = assertThrows(AccountException.class,
+                () -> accountService.getAccountsByUserId(1L));
+
+        //then
+        assertEquals(ErrorCode.USER_NOT_FOUND, exception.getErrorCode());
+    }
 }
