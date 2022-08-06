@@ -10,9 +10,7 @@ public class CreateAccount {
 
     @Getter
     @Setter
-    @NoArgsConstructor
     @AllArgsConstructor
-    @Builder
     public static class Request{
         @NotNull
         @Min(1)

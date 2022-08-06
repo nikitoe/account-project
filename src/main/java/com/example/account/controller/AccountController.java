@@ -14,6 +14,12 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 계좌 관련 컨트롤러
+ * 1. 계좌 생성
+ * 2. 계좌 해지
+ * 3. 계좌 조회
+ */
 @RestController
 @RequiredArgsConstructor
 public class AccountController {
