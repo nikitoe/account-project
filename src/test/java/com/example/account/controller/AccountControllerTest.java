@@ -93,7 +93,7 @@ class AccountControllerTest {
     }
 
     @Test
-    @DisplayName("잔액 조회 성공")
+    @DisplayName("계좌 조회 성공")
     void successGetAccountByUserId() throws Exception {
         //given
         List<AccountDto> accountDtos =
