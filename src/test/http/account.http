@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
   "userId": 1,
-  "initialBalance": 10000
+  "initialBalance": 100000
 }
 
 ### Delete Account
@@ -20,3 +20,4 @@ Content-Type: application/json
   "userId": 1,
   "accountNumber": 1000000001
 }
+
