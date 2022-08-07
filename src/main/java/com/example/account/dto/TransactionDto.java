@@ -1,6 +1,5 @@
 package com.example.account.dto;
 
-import com.example.account.domain.Account;
 import com.example.account.domain.Transaction;
 import com.example.account.type.TransactionResultType;
 import com.example.account.type.TransactionType;

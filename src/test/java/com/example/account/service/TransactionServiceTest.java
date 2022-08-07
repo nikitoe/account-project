@@ -10,7 +10,6 @@ import com.example.account.repository.AccountUserRepository;
 import com.example.account.repository.TransactionRepository;
 import com.example.account.type.AccountStatus;
 import com.example.account.type.ErrorCode;
-import com.example.account.type.TransactionType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -369,10 +368,10 @@ class TransactionServiceTest {
         AccountException exception = assertThrows(AccountException.class,
                 () -> transactionService.
                         cancelBalance(
-                        "transactionId",
-                        "1000000000",
-                        CANCEL_AMOUNT
-                )
+                                "transactionId",
+                                "1000000000",
+                                CANCEL_AMOUNT
+                        )
         );
 
         //then
@@ -462,6 +461,7 @@ class TransactionServiceTest {
         //then
         assertEquals(ErrorCode.TOO_OLD_ORDER_TO_CANCEL, exception.getErrorCode());
     }
+
     @Test
     @DisplayName("잔액 사용 확인 - 성공 응답")
     void successQueryTransaction() {
@@ -498,6 +498,7 @@ class TransactionServiceTest {
         assertEquals(CANCEL_AMOUNT, transactionDto.getAmount());
         assertEquals("transactionId", transactionDto.getTransactionId());
     }
+
     @Test
     @DisplayName("잔액 사용 확인_해당 거래 아이디의 거래가 없는 경우 - 실패 응답")
     void queryTransaction_TransactionNotFound() {
