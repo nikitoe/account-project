@@ -10,6 +10,7 @@ import com.example.account.type.AccountStatus;
 import com.example.account.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -53,14 +54,14 @@ public class AccountService {
     }
 
     private void validateCreateAccount(AccountUser accountUser) {
-        if(accountRepository.countByAccountUser(accountUser) >= 10){
+        if (accountRepository.countByAccountUser(accountUser) >= 10) {
             throw new AccountException(ErrorCode.MAX_ACCOUNT_PER_USER_10);
         }
     }
 
     @Transactional
     public Account getAccount(Long id) {
-        if(id < 0){
+        if (id < 0) {
             throw new RuntimeException("Minus");
         }
         return accountRepository.findById(id).get();
@@ -83,13 +84,13 @@ public class AccountService {
     }
 
     private void validateDeleteAccount(AccountUser accountUser, Account account) {
-        if(!Objects.equals(accountUser.getId(), account.getAccountUser().getId())) {
+        if (!Objects.equals(accountUser.getId(), account.getAccountUser().getId())) {
             throw new AccountException(USER_ACCOUNT_UN_MATCH);
         }
-        if(account.getAccountStatus() == AccountStatus.UNREGISTERED){
+        if (account.getAccountStatus() == AccountStatus.UNREGISTERED) {
             throw new AccountException(ACCOUNT_ALREADY_UNREGISTERED);
         }
-        if(account.getBalance() > 0){
+        if (account.getBalance() > 0) {
             throw new AccountException(BALANCE_NOT_EMPTY);
         }
     }
@@ -110,6 +111,6 @@ public class AccountService {
 
     private AccountUser getAccountUser(Long userId) {
         return accountUserRepository.findById(userId)
-                .orElseThrow(()-> new AccountException(USER_NOT_FOUND));
+                .orElseThrow(() -> new AccountException(USER_NOT_FOUND));
     }
 }

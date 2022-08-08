@@ -1,7 +1,6 @@
 package com.example.account.exception;
 
 import com.example.account.dto.ErrorResponse;
-import com.example.account.type.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
