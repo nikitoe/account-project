@@ -4,8 +4,18 @@ Content-Type: application/json
 
 {
   "userId":1,
-  "accountNumber":"1000000000",
-  "amount":1000
+  "accountNumber":"1000000002",
+  "amount":100
+}
+
+### Use Balacne2
+POST http://localhost:8080/transaction/use
+Content-Type: application/json
+
+{
+  "userId":1,
+  "accountNumber":"1000000002",
+  "amount":100
 }
 
 ### Cancel Balance
