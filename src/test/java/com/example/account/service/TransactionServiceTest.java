@@ -439,7 +439,7 @@ class TransactionServiceTest {
                 .transactionType(USE)
                 .transactionResultType(S)
                 .transactionId("transactionId")
-                .transactedAt(LocalDateTime.now().minusYears(1))
+                .transactedAt(LocalDateTime.now().minusYears(1).minusDays(1))
                 .amount(CANCEL_AMOUNT)
                 .balanceSnapshot(9000L)
                 .build();
